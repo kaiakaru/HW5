@@ -1,6 +1,6 @@
 /******************************************************************
  *
- *   YOUR NAME / SECTION NUMBER
+ *   KAIA KARU  / COMP 272 001
  *
  *   This java file contains the problem solutions of isSubSet, findKthLargest,
  *   and sort2Arrays methods. You should utilize the Java Collection Framework for
@@ -32,9 +32,18 @@ class ProblemSolutions {
 
     public boolean isSubset(int list1[], int list2[]) {
 
-        // ADD YOU CODE HERE -- DON'T FORGET TO ADD YOR NAME AT TOP OF FILE
-
-        return false;
+        // Add elements of list1 to a HashSet
+        HashSet<Integer> set = new HashSet<>();
+        for (int num : list1) {
+            set.add(num);
+        }
+        // Check if each element in list2 exists in the Hashset
+        for (int num : list2) {
+            if (!set.contains(num)) { // if an element is missing, return false
+                return false;
+            }
+        }
+        return true;
     }
 
 
@@ -53,9 +62,17 @@ class ProblemSolutions {
 
     public int findKthLargest(int[] array, int k) {
 
-        // ADD YOUR CODE HERE
 
-        return 0;
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>(k);
+
+        for (int num : array) {
+            minHeap.add(num);
+            if (minHeap.size() > k) {
+                minHeap.poll();
+            }
+        }
+
+        return minHeap.peek();
     }
 
 
@@ -74,9 +91,16 @@ class ProblemSolutions {
 
     public int[] sort2Arrays(int[] array1, int[] array2) {
 
-        // ADD YOU CODE HERE
+        // merged array. combing all elements and copying them.
+        int[] mergedArray = new int[array1.length + array2.length];
+        System.arraycopy(array1, 0, mergedArray, 0, array1.length);
+        System.arraycopy(array2, 0, mergedArray, array1.length, array2.length);
 
-        return null;
+        // sort the merged array
+        Arrays.sort(mergedArray);
+
+
+        return mergedArray;
     }
 
 }
